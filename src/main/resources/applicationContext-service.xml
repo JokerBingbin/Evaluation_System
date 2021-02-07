@@ -11,6 +11,10 @@
     <!-- 包扫描器，扫描带@Service注解的类 -->
     <context:component-scan base-package="com.XS.service"></context:component-scan>
 
+    <bean id="classInfoServiceImpl" class="com.XS.service.Impl.classInfoServiceImpl">
+        <property name="ClassinfoMapper" ref="classinfoMapper"/>
+    </bean>
+
 
 
 </beans>

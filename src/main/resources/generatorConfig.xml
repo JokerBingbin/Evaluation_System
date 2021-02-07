@@ -23,23 +23,23 @@
         </javaTypeResolver>
 
         <!-- targetProject:生成PO类的位置 -->
-        <javaModelGenerator targetPackage="pojo"
-                            targetProject=".\src">
+        <javaModelGenerator targetPackage="com.XS.pojo"
+                            targetProject=".\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
             <!-- 从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
-        <sqlMapGenerator targetPackage="dao"
-                         targetProject=".\src">
+        <sqlMapGenerator targetPackage="com.XS.dao"
+                         targetProject=".\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
         <!-- targetPackage：mapper接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="dao"
-                             targetProject=".\src">
+                             targetPackage="com.XS.dao"
+                             targetProject=".\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>

@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
     <typeAliases>
         <package name="com.XS.pojo"/>
     </typeAliases>
 
     <mappers>
-        <mapper class="com.XS.dao.*"/>
+        <package name="com.XS.dao"/>
     </mappers>
-
 
 </configuration>
