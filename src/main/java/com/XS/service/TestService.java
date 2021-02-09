@@ -1,10 +1,10 @@
 package com.XS.service;
 
-import com.XS.pojo.Classinfo;
+import com.XS.pojo.*;
 
 import java.util.List;
 
-public interface classInfoService {
+public interface TestService {
     //增加一个班级
     int addClass(Classinfo classinfo);
 
@@ -26,4 +26,11 @@ public interface classInfoService {
     //查询所有班级 返回list合集
     List<Classinfo> queryAllClass();
 
+    List<Student> ClassStudent(int classid);
+
+    List<Exam> ClassExam(int classid);
+
+    int addExam(Exam exam);
+
+    List<QuestionInfo> getQuestion(int examId);
 }
