@@ -1,5 +1,6 @@
 package com.XS.service;
 
+import com.XS.dao.StudentScoreWriteMapper;
 import com.XS.pojo.*;
 
 import java.util.List;
@@ -28,9 +29,47 @@ public interface TestService {
 
     List<Student> ClassStudent(int classid);
 
+    Student queryStudent(String name,int classId);
+
+    int addStudent(Student student);
+
+    int addStudentWrite(StudentScoreWrite write);
+
     List<Exam> ClassExam(int classid);
 
     int addExam(Exam exam);
 
     List<QuestionInfo> getQuestion(int examId);
+
+    List<QuestionAbility> getAbility(int classId);
+
+    List<StudentScore> getStudentScore(int examId,int studentId);
+
+    StudentScoreWrite isScoreWrite(int examId,int studentId);
+
+    Student queryStudentById(int id);
+
+    Exam queryExamById(int id);
+
+    int addStudentScore(StudentScore score);
+
+    int updateStudentScoreWrite(int examId,int studentId);
+
+    List<ExamAbility> queryExamAbilityById(int examId);
+
+    List<ExamDiff> queryExamDiffById(int examId);
+
+    List<ExamScope> queryExamScopeById(int examId);
+
+    List<ExamType> queryExamTypeById(int examId);
+
+    int addStudentAbility(StudentAbility studentAbility);
+
+    int addStudentDiff(StudentDiff studentDiff);
+
+    int addStudentScope(StudentScope studentScope);
+
+    int addStudentType(StudentType studentType);
+
+
 }

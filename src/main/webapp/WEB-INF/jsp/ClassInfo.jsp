@@ -21,7 +21,11 @@
                     <small>学生列表</small>
                 </h1>
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col-md-4 column">
+                <a href="${pageContext.request.contextPath}/Class/toAddStudent?classId=${classId}">添加学生</a>
+            </div>
         </div>
     </div>
 
@@ -36,7 +40,7 @@
                 </thead>
 
                 <tbody>
-                <c:forEach var="student" items="${student}">
+                <c:forEach var="student" items="${students}" varStatus="loop">
                     <tr>
                         <td>${student.id}</td>
                         <td>${student.name}</td>
@@ -60,6 +64,9 @@
             <div class="col-md-4 column">
                 <a href="${pageContext.request.contextPath}/Class/ToAddExam?classid=${classId}">添加考试</a>
             </div>
+            <div class="col-md-4 column">
+                <a href="${pageContext.request.contextPath}/Class/ability?classId=${classId}">查看能力</a>
+            </div>
         </div>
     </div>
 
@@ -71,6 +78,7 @@
                     <th>考试编号</th>
                     <th>考试名称</th>
                     <th>考试时间</th>
+
                 </tr>
                 </thead>
 
@@ -78,8 +86,9 @@
                 <c:forEach var="exam" items="${exam}">
                     <tr>
                         <td>${exam.id}</td>
-                        <td><a href="/Class/examInfo?id=${exam.id}">${exam.name}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/Class/examInfo?examId=${exam.id}">${exam.name}</a></td>
                         <td>${exam.time.toString()}</td>
+                        <td><a href="/Class/score?examId=${exam.id}&classId=${classId}">查看成绩</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -11,14 +11,14 @@
     <!-- 包扫描器，扫描带@Service注解的类 -->
     <context:component-scan base-package="com.XS.service"></context:component-scan>
 
-    <bean id="testService" class="com.XS.service.Impl.TestServiceImpl">
+    <!--<bean id="testService" class="com.XS.service.Impl.TestServiceImpl">
         <property name="classinfoMapper" ref="classinfoMapper"/>
         <property name="studentMapper" ref="studentMapper"/>
         <property name="examMapper" ref="examMapper"/>
         <property name="questionInfoMapper" ref="questionInfoMapper"/>
-        <property name="questionInfoMapper2" ref="questionInfoMapper"/>
+        <property name="questionAbilityMapper" ref="questionAbilityMapper"/>
+        <property name="gradeMapper" ref="gradeMapper"/>
+        <property name="subjectMapper" ref="subjectMapper"/>
     </bean>
-
-
-
+-->
 </beans>

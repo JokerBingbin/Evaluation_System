@@ -22,7 +22,11 @@
                 </h1>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-4 column">
+                <a href="${pageContext.request.contextPath}/Class/toAddClass">添加班级</a>
+            </div>
+        </div>
     </div>
 
     <div class="row clearfix">
@@ -51,7 +55,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 </div>
 </body>

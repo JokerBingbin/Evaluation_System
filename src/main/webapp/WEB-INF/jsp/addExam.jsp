@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -34,19 +35,45 @@
             <input type="date" name="time" class="form-control" id="examTime"  >
 
 
-            <%--将考试时间表格默认值设置为当天日期--%>
-            <script>
-                $(document).ready(function (){
-                    var time = new Date();
-                    var day = ("0" + time.getDate()).slice(-2);
-                    var month = ("0" + (time.getMonth()) + 1).slice(-2);
-                    var today = time.getFullYear() + "-" + (month) + "-" + (day);
-                    $('#examTime').val(today);
-                })
-            </script>
         </div>
+        <div>
+            <label>题目数量:</label>
+            <input type="number" value="20" id="num" required>
+        </div>
+        <script>
+            var num = document.getElementById("num").value;
+            console.log(num);
 
 
+        </script>
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>题号</th>
+                    <th>分值</th>
+                    <th>知识点</th>
+                    <th>难易程度</th>
+                    <th>核心能力</th>
+                    <th>知识范围</th>
+                    <th>题型</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="i" begin="1" end="29" step="1">
+                    <tr>
+                        <td>${i}</td>
+                        <input type="hidden" name="examid" >
+                        <input type="hidden" name="questionid" value="${i}">
+                        <td><input type="number" name="score" required></td>
+                        <td><input type="text" name="point" required></td>
+                        <td><input type="text" name="difficulty" required></td>
+                        <td><input type="text" name="ability" required></td>
+                        <td><input type="text" name="scope" required></td>
+                        <td><input type="text" name="type" required></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         <input type="submit" value="添加">
 
 

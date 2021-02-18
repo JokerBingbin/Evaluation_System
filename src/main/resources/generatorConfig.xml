@@ -24,7 +24,7 @@
 
         <!-- targetProject:生成PO类的位置 -->
         <javaModelGenerator targetPackage="com.XS.pojo"
-                            targetProject=".\src">
+                            targetProject=".\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
             <!-- 从数据库返回的值被清理前后的空格 -->
@@ -32,14 +32,14 @@
         </javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
         <sqlMapGenerator targetPackage="com.XS.dao"
-                         targetProject=".\src">
+                         targetProject=".\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
         <!-- targetPackage：mapper接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="com.XS.dao"
-                             targetProject=".\src\">
+                             targetProject=".\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
@@ -51,11 +51,21 @@
 <!--        <table tableName="grade"/>-->
 <!--        <table tableName="question_ability"/>-->
 <!--        <table tableName="question_difficulty"/>-->
-        <table tableName="question_info"/>
+<!--        <table tableName="question_info"/>-->
 <!--        <table tableName="question_scope"/>-->
 <!--        <table tableName="question_type"/>-->
 <!--        <table tableName="student"/>-->
+<!--        <table tableName="student_score"/>-->
+<!--        <table tableName="student_score_write"/>-->
 <!--        <table tableName="subject"/>-->
+        <table tableName="exam_ability"/>
+        <table tableName="exam_scope"/>
+        <table tableName="exam_type"/>
+        <table tableName="exam_diff"/>
+        <table tableName="student_ability"/>
+        <table tableName="student_scope"/>
+        <table tableName="student_type"/>
+        <table tableName="student_diff"/>
 <!--        <table tableName="user"/>-->
 
         <!-- 有些表的字段需要指定java类型

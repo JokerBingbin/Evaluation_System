@@ -8,6 +8,7 @@
     <!-- 配置SpringMVC -->
     <!-- 1.开启SpringMVC注解驱动 -->
     <mvc:annotation-driven />
+
     <!-- 2.静态资源默认servlet配置-->
     <mvc:default-servlet-handler/>
 
