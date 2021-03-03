@@ -11,7 +11,7 @@
     <!-- 包扫描器，扫描带@Service注解的类 -->
     <context:component-scan base-package="com.XS.service"></context:component-scan>
 
-    <!--<bean id="testService" class="com.XS.service.Impl.TestServiceImpl">
+    <!--<bean id="testService" class="ClassServiceImpl">
         <property name="classinfoMapper" ref="classinfoMapper"/>
         <property name="studentMapper" ref="studentMapper"/>
         <property name="examMapper" ref="examMapper"/>

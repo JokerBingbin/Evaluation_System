@@ -54,41 +54,46 @@
                         <input type="text" name="list[${loop.count-1}].point" required>
                     </td>
                     <td>
-                        <select id="diff_select">
+                        <%--<select id="diff_select">
                             <c:forEach var="diff" items="${questionDiffs}">
                                 <option value="${diff.diff}">${diff.diff}</option>
                             </c:forEach>
-                        </select>
+                        </select>--%>
+                            <input type="text" name="list[${loop.count-1}].difficulty" required>
                     </td>
-                    <input type="text" name="list[${loop.count-1}].difficulty" required>
+
 
                     <td>
-                        <select id="ability_select">
+                        <%--<select id="ability_select">
                             <c:forEach var="ability" items="${questionAbilities}">
                                 <option value="${ability.name}">${ability.name}</option>
                             </c:forEach>
-                        </select>
+                        </select>--%>
+                        <input type="text" name="list[${loop.count-1}].ability" required>
                     </td>
-                    <input type="text" name="list[${loop.count-1}].ability" required>
+
 
                     <td>
-                        <select id="scope_select">
+                        <%--<select id="scope_select">
                             <c:forEach var="scope" items="${questionScopes}">
                                 <option value="${scope.name}">${scope.name}</option>
                             </c:forEach>
-                        </select>
+                        </select>--%>
+                        <input type="text" name="list[${loop.count-1}].scope" required>
                     </td>
-                    <input type="text" name="list[${loop.count-1}].scope" required>
+
 
                     <td>
-                        <select id="type_select">
+                        <%--<select id="type_select">
                             <c:forEach var="type" items="${questionTypes}">
                                 <option value="${type.qtype}">${type.qtype}</option>
                             </c:forEach>
-                        </select>
+                        </select>--%>
+
+                        <input type="text" name="list[${loop.count-1}].type" required>
                     </td>
-                    <input type="text" name="list[${loop.count-1}].type" required>
-                    <td><img onclick="delRow(${i})" src="/WEB-INF/image/delete.jpg" style="width: 18px;height:18px;cursor:pointer"></td>
+
+                    <%--<td><img onclick="delRow(${i})" src="/WEB-INF/image/delete.jpg" style="width: 18px;height:18px;cursor:pointer"></td>--%>
                 </tr>
             </c:forEach>
             </tbody>
@@ -113,8 +118,8 @@
                 td5.innerHTML = '<input type="text" name="list['+rows+'].scope" required>';
                 var td6 = newTr.insertCell();
                 td6.innerHTML = '<input type="text" name="list['+rows+'].type" required>';
-                var td7 = newTr.insertCell();
-                td7.innerHTML = '<img onclick="delRow('+rows+')" src="/WEB-INF/image/delete.jpg" style="width: 18px;height:18px;cursor:pointer"> ';
+               /* var td7 = newTr.insertCell();*/
+              /*  td7.innerHTML = '<img onclick="delRow('+rows+')" src="/WEB-INF/image/delete.jpg" style="width: 18px;height:18px;cursor:pointer"> ';*/
             }
 
             function delRow(rowIndex){
