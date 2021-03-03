@@ -1,17 +1,15 @@
 package com.XS.controller;
 
 import com.XS.pojo.*;
+import com.XS.service.ClassService;
+import com.XS.service.QuestionService;
 import com.XS.service.ScoreService;
-import com.XS.service.TestService;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,18 +20,22 @@ import java.util.List;
 public class ClassController {
 
 
-    private TestService testService;
+    private ClassService testService;
     private ScoreService scoreService;
-
-
+    private QuestionService questionService;
     @Autowired
-    public void setTestService(TestService testService) {
+    public void setTestService(ClassService testService) {
         this.testService = testService;
     }
 
     @Autowired
     public void setScoreService(ScoreService scoreService) {
         this.scoreService = scoreService;
+    }
+
+    @Autowired
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
     //显示所有班级
@@ -44,6 +46,7 @@ public class ClassController {
         return "allClass";
     }
 
+    
     //显示班级具体信息：学生、考试列表
     @RequestMapping("ClassInfo")
     public String showClassInfo(int id,Model model){
@@ -64,19 +67,143 @@ public class ClassController {
 
     //添加考试
     @RequestMapping("addExam")
-    public String AddExam(Exam exam){
-        System.out.println(exam.getTime().toString());
-        testService.addExam(exam);
+    public String AddExam(String name,String time,Integer classId,Integer number,Model model){
+        Exam exam = new Exam();
+        List<Exam> exams = testService.allExam();
+        exam.setId(exams.get(exams.size()-1).getId()+1);
+        exam.setName(name);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(time);
+            exam.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "allClass";
+        }
+        exam.setClassid(classId);
+        Classinfo classinfo = testService.queryClassById(classId);
+        Grade grade = testService.queryGradeByName(classinfo.getGrade());
+        Subject subject = testService.querySubjectByName(classinfo.getSubject());
+        List<QuestionAbility> questionAbilities = questionService.queryQuestionAbility(subject.getId(), grade.getId());
+        List<QuestionDifficulty> questionDifficulties = questionService.queryQuestionDiff(subject.getId(), grade.getId());
+        List<QuestionScope> questionScopes = questionService.queryQuestionScope(subject.getId(), grade.getId());
+        List<QuestionType> questionTypes = questionService.queryQuestionType(subject.getId(), grade.getId());
+
+        System.out.println("classId"+classId);
+        System.out.println(exam.getClassid());
+        model.addAttribute("exam",exam);
+        model.addAttribute("number",number);
+        model.addAttribute("questionAbilities",questionAbilities);
+        model.addAttribute("questionDiffs",questionDifficulties);
+        model.addAttribute("questionScopes",questionScopes);
+        model.addAttribute("questionTypes",questionTypes);
+//        System.out.println(exam.getTime());
+        return "addQuestion";
+    }
+
+    @RequestMapping("addExamFinal")
+    public String addExamFinal(Exam exam,QuestionInfoList questionInfoList){
+//        testService.addExam(exam);                                 //写入操作
+//        System.out.println(exam.toString());
+        List<QuestionInfo> list = questionInfoList.getList();
+        List<ExamDiff> diffs = new ArrayList<ExamDiff>();
+        List<ExamAbility> abilities = new ArrayList<ExamAbility>();
+        List<ExamScope> scopes = new ArrayList<ExamScope>();
+        List<ExamType> types = new ArrayList<ExamType>();
+        int i = 1;
+        for(QuestionInfo info : list){
+            info.setExamid(exam.getId());
+            info.setQustionid(i);
+            i++;
+            int flag = 0;
+            for(ExamDiff diff : diffs){
+                if(info.getDifficulty().equals(diff.getName())){
+                    flag = 1;
+                    diff.setScore(diff.getScore()+info.getScore());
+                }
+            }
+            if(flag == 0){
+                ExamDiff diff = new ExamDiff();
+                diff.setExamid(exam.getId());
+                diff.setName(info.getDifficulty());
+                diff.setScore(info.getScore());
+                diffs.add(diff);
+            }
+            flag = 0;
+            for(ExamAbility ability:abilities){
+                if(info.getAbility().equals(ability.getName())){
+                    flag = 1;
+                    ability.setScore(ability.getScore()+info.getScore());
+                }
+            }
+            if(flag == 0){
+                ExamAbility ability = new ExamAbility();
+                ability.setExamid(exam.getId());
+                ability.setName(info.getAbility());
+                ability.setScore(info.getScore());
+                abilities.add(ability);
+            }
+            flag = 0;
+            for(ExamScope scope : scopes){
+                if(info.getScope().equals(scope.getName())){
+                    flag = 1;
+                    scope.setScore(scope.getScore()+info.getScore());
+                }
+            }
+            if(flag == 0){
+                ExamScope scope = new ExamScope();
+                scope.setExamid(exam.getId());
+                scope.setName(info.getScope());
+                scope.setScore(info.getScore());
+                scopes.add(scope);
+            }
+            flag = 0;
+            for(ExamType type : types){
+                if(info.getType().equals(type.getName())){
+                    flag = 1;
+                    type.setScore(type.getScore()+info.getScore());
+                }
+            }
+            if(flag == 0){
+                ExamType type = new ExamType();
+                type.setExamid(exam.getId());
+                type.setName(info.getType());
+                type.setScore(info.getScore());
+                types.add(type);
+            }
+            System.out.println(info.toString());
+//            testService.addQuestionInfo(info);            //写入操作
+        }
+//        System.out.println("难度");
+        for(ExamDiff diff:diffs){
+            System.out.println(diff.getName()+":"+diff.getScore());
+//            scoreService.addExamDiff(diff);                //写入操作
+        }
+//        System.out.println("能力");
+        for(ExamAbility ability:abilities){
+//            scoreService.addExamAbility(ability);         //写入操作
+            System.out.println(ability.getName()+":"+ability.getScore());
+        }
+//        System.out.println("知识范围");
+        for(ExamScope scope:scopes){
+//            scoreService.addExamScope(scope);           //写入操作
+            System.out.println(scope.getName()+":"+scope.getScore());
+        }
+//        System.out.println("题型");
+        for(ExamType type:types){
+//            scoreService.addExamType(type);              //写入操作
+            System.out.println(type.getName()+":"+type.getScore());
+        }
+        List<Student> students = testService.ClassStudent(exam.getClassid());
+        StudentScoreWrite write = new StudentScoreWrite();
+        write.setExamid(exam.getId());
+        write.setIswrite(0);
+        for(Student student:students){
+            write.setStudentid(student.getId());
+//            testService.addStudentWrite(write);//写入操作
+        }
         return "addSuccess";
     }
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
-
     //显示考试题目具体信息
     @RequestMapping("examInfo")
     public String ExamInfo(Integer examId,Model model){
@@ -239,7 +366,6 @@ public class ClassController {
         List<StudentScope> studentScopes = scoreService.queryStudentScopeByExamId(examId,studentId);
         List<StudentType> studentTypes = scoreService.queryStudentTypeByExamId(examId,studentId);
 
-
         //学生总分
         float sum = 0;
         for(int i=0;i<studentScores.size();i++){
@@ -250,6 +376,45 @@ public class ClassController {
         for(QuestionInfo questionInfo : questionInfos){
             examSum += questionInfo.getScore();
         }
+
+        //计算知识范围的平均得分
+        List<StudentScoreWrite> scoreWrites = scoreService.queryWriteStudent(examId);
+        for (int i = 0; i < scoreWrites.size(); i++) {
+            StudentScoreWrite write =  scoreWrites.get(i);
+        }
+        float[] scopeAverage = new float[studentScopes.size()];
+        float[] abilityAverage = new float[studentAbilities.size()];
+        for(StudentScoreWrite student1 : scoreWrites){
+            for(int i = 0;i<studentScopes.size();i++){
+                StudentScope scope = studentScopes.get(i);
+                scopeAverage[i] += scoreService.queryStudentScopeScore(student1.getStudentid(),examId,scope.getName()).getScore();
+            }
+            for(int i = 0;i<studentAbilities.size();i++){
+                StudentAbility ability = studentAbilities.get(i);
+                abilityAverage[i] += scoreService.queryStudentAbilityScore(student1.getStudentid(),examId,ability.getName()).getScore();
+            }
+        }
+        for(int i = 0;i<scopeAverage.length;i++){
+            scopeAverage[i] /= scoreWrites.size();
+        }
+        for(int i = 0;i<abilityAverage.length;i++){
+            abilityAverage[i] /= scoreWrites.size();
+        }
+
+        java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");
+
+        //每一题的平均分
+        float averageSum = 0;
+        float[] average = new float[questionInfos.size()];
+        for(int i=0;i<questionInfos.size();i++){
+            for(StudentScoreWrite scoreWrite : scoreWrites){
+                average[i] += scoreService.queryQuestionScore(scoreWrite.getStudentid(),examId,i+1);
+            }
+            average[i] /= scoreWrites.size();
+            df.format(average[i]);
+            averageSum += average[i];
+        }
+
         model.addAttribute("studentScore",studentScores);
         model.addAttribute("questionInfos",questionInfos);
         model.addAttribute("exam",exam);
@@ -265,7 +430,10 @@ public class ClassController {
         model.addAttribute("studentDiffs",studentDiffs);
         model.addAttribute("studentScope",studentScopes);
         model.addAttribute("studentType",studentTypes);
-
+        model.addAttribute("scopeAverage",scopeAverage);
+        model.addAttribute("abilityAverage",abilityAverage);
+        model.addAttribute("average",average);
+        model.addAttribute("averageSum",averageSum);
         return "showScore";
 
     }
@@ -302,6 +470,28 @@ public class ClassController {
     @RequestMapping("addClass")
     public String addClass(Classinfo classinfo){
         testService.addClass(classinfo);
+        return "redirect:/Class/allClass";
+    }
+
+    @RequestMapping("studentExam")
+    public String studentExam(Integer studentId,Integer classId,Model model){
+        List<Exam>  exams= testService.ClassExam(classId);
+        List<StudentScoreWrite> list = scoreService.queryStudentExamScoreWrite(studentId);
+        model.addAttribute("exams",exams);
+        model.addAttribute("scoreWrite",list);
+        return "studentExam";
+    }
+
+    @RequestMapping("toUpdateClass")
+    public String toUpdateClass(Integer classId,Model model){
+        Classinfo classInfo = testService.queryClassById(classId);
+        model.addAttribute("classInfo",classInfo);
+        return "updateClass";
+    }
+
+    @RequestMapping("updateClass")
+    public String updateClass(Classinfo classinfo){
+        testService.updateClass(classinfo);
         return "redirect:/Class/allClass";
     }
 }

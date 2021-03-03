@@ -102,10 +102,13 @@ public interface ScoreService {
 
     StudentAbility queryStudentAbilityByName(int examId,int studentId,String name);
 
+    StudentScope queryStudentScopeScore(int studentId,int examId,String scope);
 
+    StudentAbility queryStudentAbilityScore(int studentId,int examId,String ability);
 
+    List<StudentScoreWrite> queryWriteStudent(int examId);
 
+    List<StudentScoreWrite> queryStudentExamScoreWrite(int studentId);
 
-
-
- }
+    float queryQuestionScore(int studentId,int examId,int questionId);
+}

@@ -5,7 +5,7 @@ import com.XS.pojo.*;
 
 import java.util.List;
 
-public interface TestService {
+public interface ClassService {
     //增加一个班级
     int addClass(Classinfo classinfo);
 
@@ -36,6 +36,8 @@ public interface TestService {
     int addStudentWrite(StudentScoreWrite write);
 
     List<Exam> ClassExam(int classid);
+
+    List<Exam> allExam();
 
     int addExam(Exam exam);
 
@@ -71,5 +73,9 @@ public interface TestService {
 
     int addStudentType(StudentType studentType);
 
+    int addQuestionInfo(QuestionInfo info);
 
+    Grade queryGradeByName(String name);
+
+    Subject querySubjectByName(String name);
 }
