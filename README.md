@@ -4,39 +4,39 @@
 
 ## 添加班级
 
-![image-20210304002257723](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002257723.png)
+![1](https://s3.ax1x.com/2021/03/04/6E7XJs.md.png)
 
 从班级列表的添加班级按钮进入
 
-![image-20210304002242661](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002242661.png)
+![image-20210304002242661](https://s3.ax1x.com/2021/03/04/6E7Oij.md.png)
 
 ## 添加学生
 
-![image-20210304002339315](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002339315.png)
+![image-20210304002339315](https://s3.ax1x.com/2021/03/04/6E7jWn.md.png)
 
 从班级信息页面的添加学生按钮进入
 
-![image-20210304002349151](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002349151.png)
+![image-20210304002349151](https://s3.ax1x.com/2021/03/04/6E7qoQ.md.png)
 
 ## 添加考试
 
-![image-20210304002449434](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002449434.png)![image-20210304002501456](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002501456.png)
+![image-20210304002449434](https://s3.ax1x.com/2021/03/04/6E7bdg.md.png)![image-20210304002501456](https://s3.ax1x.com/2021/03/04/6E7zQ0.md.png)
 
 ## 导入成绩
 
 
 
-![image-20210304002535712](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002535712.png)
+![image-20210304002535712](https://s3.ax1x.com/2021/03/04/6EHSyV.md.png)
 
 点击未导入按钮即可进入导入成绩页面。
 
-![image-20210304002525898](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002525898.png)
+![image-20210304002525898](https://s3.ax1x.com/2021/03/04/6E7zQ0.md.png)
 
 ## 测评结果
 
 点击查看按钮进入
 
-![image-20210304002634844](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002634844.png)
+![image-20210304002634844](https://s3.ax1x.com/2021/03/04/6EHCeU.png)
 
-![image-20210304002651397](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210304002651397.png)
+![image-20210304002651397](https://s3.ax1x.com/2021/03/04/6EHpLT.png)
 
