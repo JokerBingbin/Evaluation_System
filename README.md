@@ -11,7 +11,7 @@
 ![image-20210304002242661](https://s3.ax1x.com/2021/03/04/6E7Oij.md.png)
 
 ## 添加学生
-###this is a git test.
+I have deleted the change.
 
 ![image-20210304002339315](https://s3.ax1x.com/2021/03/04/6E7jWn.md.png)
 
